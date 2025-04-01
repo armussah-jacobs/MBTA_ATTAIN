@@ -1,0 +1,42 @@
+{
+  "name" : "silvertable_update_script",
+  "jobMode" : "SCRIPT",
+  "description" : "",
+  "role" : "arn:aws:iam::992382490096:role/MBTA_S3_Bucket_Role",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-992382490096-us-east-1/scripts/silvertable_update_script.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--extra-py-files" : "s3://aws-glue-assets-992382490096-us-east-1/jar/delta-core_2.12-1.0.0.jar",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-992382490096-us-east-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--enable-observability-metrics" : "true",
+    "--enable-glue-datacatalog" : "true",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-992382490096-us-east-1/temporary/",
+    "--extra-jars" : "s3://aws-glue-assets-992382490096-us-east-1/jar/delta-core_2.12-1.0.0.jar"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 480,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "3.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "MBTA_ATTAIN",
+    "branch" : "main",
+    "folder" : "scripts/silver"
+  }
+}
